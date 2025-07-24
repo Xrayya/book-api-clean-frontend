@@ -1,32 +1,15 @@
-import AppSidebar from "@/components/sidebar/app-sidebar";
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
-import { createRootRoute, Link, Outlet } from "@tanstack/react-router";
-import { TanStackRouterDevtools } from "@tanstack/router-devtools";
-import { Home } from "lucide-react";
-import "../global.css";
+import Header from '@/components/Header'
+import { Outlet, createRootRoute } from '@tanstack/react-router'
+import { TanStackRouterDevtools } from '@tanstack/react-router-devtools'
+
 
 export const Route = createRootRoute({
-  component: Root,
-});
-
-function Root() {
-  const sidebarMenuItems: React.ReactNode[] = [
-    <Link to={"/"}>
-      <Home />
-      Home
-    </Link>,
-  ];
-
-  return (
+  component: () => (
     <>
-      <SidebarProvider>
-        <AppSidebar sidebarMenuItems={sidebarMenuItems} />
-        <main>
-          <SidebarTrigger />
-          <Outlet />
-        </main>
-      </SidebarProvider>
+      <Header />
+
+      <Outlet />
       <TanStackRouterDevtools />
     </>
-  );
-}
+  ),
+})
